@@ -1,0 +1,43 @@
+{
+  "name": "molecuel",
+  "version": "0.5.0",
+  "private": true,
+  "dependencies": {
+    "express": ">=0.0.1",
+    "express-session": ">=0.0.1",
+    "config": ">=0.0.1",
+    "async": ">=0.0.1",
+    "underscore": ">=0.0.1",
+    "mlcl_core": ">=0.0.1",
+    "mlcl_user": ">=0.2.6",
+    "mlcl_url": ">=0.0.1",
+    "mlcl_database": ">=0.0.1",
+    "mlcl_elastic": ">=0.0.1",
+    "mlcl_i18n": ">=0.0.1",
+    "mlcl_elements": ">=0.0.1",
+    "mlcl_collections": ">=0.0.1",
+    "mlcl_log": ">=0.0.1",
+    "mlcl_queue": ">=0.0.1"
+  },
+  "engines": {
+    "node": ">=4.0.0"
+  },
+  "devDependencies": {
+    "assert": ">=0.0.1",
+    "chai": ">=0.0.1",
+    "grunt": ">=0.0.1",
+    "grunt-contrib-clean": ">=0.0.1",
+    "grunt-git": ">=0.0.1",
+    "grunt-shell": ">=0.0.1",
+    "mocha": "*",
+    "should": "^5.2.0",
+    "supertest": ">=0.0.1"
+  },
+  "scripts": {
+    "test": "node_modules/.bin/mocha -w",
+    "start": "node app.js"
+  },
+  "config": {
+    "unsafe-perm": true
+  }
+}

@@ -1,0 +1,18 @@
+# Molecuel minimal
+The Molecuel minimal starter package which includes basic configurations to get started with the molecuel Development.
+It offers an easy starting point to create powerful BigData applications.
+
+Requirements:
+- Elasticsearch
+- MongoDB
+- RabbitMQ
+
+@coming soon: Documentation and getting started guide...
+
+## Configuration
+
+The configuration is loaded by the NODE_ENV variable. It defaults to development.js in the config folder.
+
+## Data model generation
+
+## Creating collections
