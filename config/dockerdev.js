@@ -21,7 +21,7 @@ config = {
   molecuel: {
     database: {
       type: 'mongodb',
-      uri: 'mongodb://192.168.99.1/mlcl_minimal',
+      uri: 'mongodb://192.168.99.100/mlcl_minimal',
       debug: true,
       cache: {
         max:50,
@@ -33,7 +33,7 @@ config = {
       uri: 'amqp://molecuel:molecuel@192.168.99.100/molecuel'
     },
     search: {
-      hosts: ['http://192.168.99.1:9200'],
+      hosts: ['http://192.168.99.100:9200'],
       prefix: 'mlcl_minimal'
     },
     log: {

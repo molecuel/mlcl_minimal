@@ -1,10 +1,10 @@
 'use strict';
-var express = require('express');
-var https = require('https');
-var fs = require('fs');
-var _ = require('underscore');
-var session = require('express-session');
-var Molecuel = require('mlcl_core');
+const express = require('express');
+const https = require('https');
+const fs = require('fs');
+const async = require('async');
+const session = require('express-session');
+const Molecuel = require('mlcl_core');
 var config = require('config');
 var ssl = config.server.ssl.enabled || false;
 var excl = config.server.ssl.exclusive || false;
@@ -19,9 +19,6 @@ class mlclrunner {
         if (config.session && config.session.secret) {
             this.app.use(session({ secret: config.session.secret, resave: true, saveUninitialized: true }));
         }
-        this.app.get('/test', function (req, res) {
-            res.sendStatus(200);
-        });
         mlclrunner.molecuel.on('init', () => {
             mlclrunner.molecuel.initApplication(this.app);
             if (mlclrunner.molecuel.serverroles && mlclrunner.molecuel.serverroles.server) {
@@ -46,7 +43,6 @@ class mlclrunner {
         console.log('Server started in ' + process.env.NODE_ENV + ' mode...', 'Ctrl+C to shut down');
     }
     startHttp() {
-        var server = this.app;
         if (ssl && excl) {
             var redirserver = express();
             redirserver.get('*', function (req, res) {
@@ -65,8 +61,12 @@ class mlclrunner {
         if (!(hosts instanceof Array)) {
             hosts = [hosts];
         }
-        _.each(hosts, (host) => {
+        async.each(hosts, (host, cb) => {
+            mlclrunner.molecuel.log.debug('server', 'start http server');
+            let server = require('http').createServer(this.app);
+            mlclrunner.molecuel.setServerInstance(server);
             server.listen(config.server.port, host, this.onStartServer);
+            cb();
         });
     }
     startHttps() {
@@ -77,8 +77,9 @@ class mlclrunner {
             hosts = [hosts];
         }
         if (hosts.length) {
-            _.each(hosts, (host) => {
+            async.each(hosts, (host, cb) => {
                 this.startHttpsServer(config.server.ssl.port, host, this.sslOptions());
+                cb();
             });
         }
     }
@@ -87,5 +88,4 @@ class mlclrunner {
         https.createServer(options, this.app).listen(port, host, this.onStartServer);
     }
 }
-new mlclrunner();
-module.exports = mlclrunner;
+module.exports = exports = new mlclrunner();

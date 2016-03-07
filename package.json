@@ -1,15 +1,14 @@
 {
   "name": "molecuel",
-  "version": "0.5.0",
+  "version": "0.0.1",
   "private": true,
   "dependencies": {
     "express": ">=0.0.1",
     "express-session": ">=0.0.1",
     "config": ">=0.0.1",
     "async": ">=0.0.1",
-    "underscore": ">=0.0.1",
     "mlcl_core": ">=0.0.1",
-    "mlcl_user": ">=0.2.6",
+    "mlcl_user": ">=0.0.1",
     "mlcl_url": ">=0.0.1",
     "mlcl_database": ">=0.0.1",
     "mlcl_elastic": ">=0.0.1",
@@ -23,15 +22,13 @@
     "node": ">=4.0.0"
   },
   "devDependencies": {
-    "assert": ">=0.0.1",
-    "chai": ">=0.0.1",
     "grunt": ">=0.0.1",
     "grunt-contrib-clean": ">=0.0.1",
     "grunt-git": ">=0.0.1",
     "grunt-shell": ">=0.0.1",
-    "mocha": "*",
-    "should": "^5.2.0",
-    "supertest": ">=0.0.1"
+    "mocha": "^2.4.5",
+    "should": "^8.2.2",
+    "supertest": "^1.2.0"
   },
   "scripts": {
     "test": "node_modules/.bin/mocha -w",

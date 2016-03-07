@@ -1,27 +1,29 @@
 'use strict';
-/// <reference path="typings/underscore/underscore.d.ts"/>
 /// <reference path="typings/node/node.d.ts"/>
 /// <reference path="typings/express/express.d.ts"/>
 /// <reference path="typings/express-session/express-session.d.ts"/>
 
 // # Module dependencies
 import express = require('express');
-import https   = require('https');
-import fs      = require('fs');
-import _       = require('underscore');
+import https = require('https');
+import http = require('http');
+import fs = require('fs');
+import async = require('async');
 import session = require('express-session');
 import Molecuel = require('mlcl_core');
 
-var config  = require('config');
+var config = require('config');
+
 var ssl = config.server.ssl.enabled || false;
 var excl = config.server.ssl.exclusive || false;
 
 class mlclrunner {
-  private static molecuel:Molecuel;
-  public app:express.Application;
+  private static molecuel: Molecuel;
+  public app: express.Application;
+  public server: any;
   constructor() {
     // ensure that server exits correctly on Ctrl+C
-    process.on('SIGINT', function () {
+    process.on('SIGINT', function() {
       console.log(
         'Server has shut down',
         'Your Application is now offline'
@@ -33,21 +35,17 @@ class mlclrunner {
 
     mlclrunner.molecuel = new Molecuel(config);
 
-    if(config.session && config.session.secret) {
-      this.app.use(session({secret: config.session.secret, resave: true, saveUninitialized: true}));
+    if (config.session && config.session.secret) {
+      this.app.use(session({ secret: config.session.secret, resave: true, saveUninitialized: true }));
     }
-
-    this.app.get('/test', function(req, res) {
-      res.sendStatus(200);
-    });
 
     mlclrunner.molecuel.on('init', () => {
       mlclrunner.molecuel.initApplication(this.app);
-      if(mlclrunner.molecuel.serverroles && mlclrunner.molecuel.serverroles.server) {
-          this.startHttp();
-          this.startHttps();
+      if (mlclrunner.molecuel.serverroles && mlclrunner.molecuel.serverroles.server) {
+        this.startHttp();
+        this.startHttps();
       } else {
-          mlclrunner.molecuel.log.info('molecuel','Running molecuel without server role')
+        mlclrunner.molecuel.log.info('molecuel', 'Running molecuel without server role')
       }
     })
   }
@@ -62,24 +60,27 @@ class mlclrunner {
     return options;
   }
   private onStartServer() {
+    /**
+    require('./socket').loadSocket(this, app);
+    listenRegister();
+    **/
     console.log(
-      'Server started in '+ process.env.NODE_ENV +' mode...',
+      'Server started in ' + process.env.NODE_ENV + ' mode...',
       'Ctrl+C to shut down'
     );
   }
   private startHttp() {
-    var server:express.Application = this.app;
     // Redirect all http requests to https if exclusive mode is enabled
-    if(ssl && excl) {
+    if (ssl && excl) {
       //set up plain http server for redirection
-      var redirserver:express.Application = express();
+      var redirserver: express.Application = express();
       redirserver.get('*', function(req, res) {
         var u = mlclrunner.molecuel.parseRequest(req);
         var port = config.server.ssl.port || 443;
-        if(port === 443) {
+        if (port === 443) {
           port = '';
         } else {
-          port = ':'+port;
+          port = ':' + port;
         }
         res.redirect('https://' + u.hostname + port + u.path);
       });
@@ -87,22 +88,27 @@ class mlclrunner {
 
     // Initialize the hosts
     var hosts = config.server.host || ['127.0.0.1'];
-    if(!(hosts instanceof Array)) {
+    if (!(hosts instanceof Array)) {
       hosts = [hosts];
     }
-    _.each(hosts, (host: string) => {
+    async.each(hosts, (host: string, cb: ErrorCallback) => {
+      mlclrunner.molecuel.log.debug('server', 'start http server');
+      let server = require('http').createServer(this.app);
+      mlclrunner.molecuel.setServerInstance(server);
       server.listen(config.server.port, host, this.onStartServer);
+      cb();
     });
   }
   private startHttps() {
-    if(!ssl) return;
+    if (!ssl) return;
     var hosts = config.server.ssl.host || config.server.host;
-    if(!(hosts instanceof Array)) {
+    if (!(hosts instanceof Array)) {
       hosts = [hosts];
     }
-    if(hosts.length) {
-      _.each(hosts, (host: string) => {
+    if (hosts.length) {
+      async.each(hosts, (host: string, cb: ErrorCallback) => {
         this.startHttpsServer(config.server.ssl.port, host, this.sslOptions());
+        cb();
       });
     }
   }
@@ -114,5 +120,4 @@ class mlclrunner {
   }
 }
 
-new mlclrunner();
-export = mlclrunner;
+module.exports = exports = new mlclrunner();

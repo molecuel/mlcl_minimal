@@ -1,23 +1,42 @@
 {
-    "compilerOptions": {
-        "target": "es6",
-        "module": "commonjs",
-        "declaration": true
-    },
-    "filesGlob": [
-        "./**/*.ts",
-        "!./node_modules/**/*.ts"
-    ],
-    "files": [
-        "./app.d.ts",
-        "./app.ts",
-        "./typings/async/async.d.ts",
-        "./typings/colors/colors.d.ts",
-        "./typings/config/config.d.ts",
-        "./typings/express-session/express-session.d.ts",
-        "./typings/express/express.d.ts",
-        "./typings/mongoose/mongoose.d.ts",
-        "./typings/node/node.d.ts",
-        "./typings/underscore/underscore.d.ts"
-    ]
+  "compileOnSave": true,
+  "sortOutput": true,
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "declaration": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "sourceMap": false
+  },
+  "files": [
+      "./app.d.ts",
+      "./app.ts",
+      "./typings/async/async.d.ts",
+      "./typings/colors/colors.d.ts",
+      "./typings/config/config.d.ts",
+      "./typings/express-session/express-session.d.ts",
+      "./typings/express/express.d.ts",
+      "./typings/mongoose/mongoose.d.ts",
+      "./typings/node/node.d.ts",
+      "./typings/underscore/underscore.d.ts"
+  ],
+  "atom": {
+    "rewriteTsconfig": false,
+    "formatOnSave": true
+  },
+  "formatCodeOptions": {
+    "indentSize": 2,
+    "tabSize": 2,
+    "newLineCharacter": "\r\n",
+    "convertTabsToSpaces": true,
+    "insertSpaceAfterCommaDelimiter": true,
+    "insertSpaceAfterSemicolonInForStatements": true,
+    "insertSpaceBeforeAndAfterBinaryOperators": true,
+    "insertSpaceAfterKeywordsInControlFlowStatements": true,
+    "insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
+    "insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": false,
+    "placeOpenBraceOnNewLineForFunctions": false,
+    "placeOpenBraceOnNewLineForControlBlocks": false
+  }
 }
