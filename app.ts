@@ -1,8 +1,4 @@
 'use strict';
-/// <reference path="typings/node/node.d.ts"/>
-/// <reference path="typings/express/express.d.ts"/>
-/// <reference path="typings/express-session/express-session.d.ts"/>
-
 // # Module dependencies
 import express = require('express');
 import https = require('https');

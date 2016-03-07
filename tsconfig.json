@@ -1,6 +1,5 @@
 {
-  "compileOnSave": true,
-  "sortOutput": true,
+  "compileOnSave": false,
   "compilerOptions": {
     "target": "es6",
     "module": "commonjs",
@@ -10,16 +9,13 @@
     "sourceMap": false
   },
   "files": [
-      "./app.d.ts",
-      "./app.ts",
-      "./typings/async/async.d.ts",
-      "./typings/colors/colors.d.ts",
-      "./typings/config/config.d.ts",
-      "./typings/express-session/express-session.d.ts",
-      "./typings/express/express.d.ts",
-      "./typings/mongoose/mongoose.d.ts",
-      "./typings/node/node.d.ts",
-      "./typings/underscore/underscore.d.ts"
+    "typings/main.d.ts",
+    "app.ts"
+  ],
+  "exclude": [
+    "typings/browser.d.ts",
+    "typings/browser",
+    "node_modules"
   ],
   "atom": {
     "rewriteTsconfig": false,

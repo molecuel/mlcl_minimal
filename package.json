@@ -22,13 +22,22 @@
     "node": ">=4.0.0"
   },
   "devDependencies": {
-    "grunt": ">=0.0.1",
-    "grunt-contrib-clean": ">=0.0.1",
-    "grunt-git": ">=0.0.1",
-    "grunt-shell": ">=0.0.1",
+    "assert": "^1.3.0",
+    "del": "^2.2.0",
+    "gulp": "^3.9.1",
+    "gulp-plumber": "^1.1.0",
+    "gulp-tsconfig-files": "^0.3.0",
+    "gulp-tslint": "^4.3.3",
+    "gulp-typescript": "^2.12.1",
+    "gulp-util": "^3.0.7",
+    "gulpclass": "^0.1.0",
+    "merge2": "^1.0.1",
     "mocha": "^2.4.5",
     "should": "^8.2.2",
-    "supertest": "^1.2.0"
+    "supertest": "^1.2.0",
+    "tslint": "^3.5.0",
+    "tslint-stylish": "^2.1.0-beta",
+    "typescript": "^1.8.7"
   },
   "scripts": {
     "test": "node_modules/.bin/mocha -w",
@@ -36,5 +45,11 @@
   },
   "config": {
     "unsafe-perm": true
+  },
+  "devconfig": {
+    "paths": {
+      "source": "app.ts",
+      "dist": "."
+    }
   }
 }

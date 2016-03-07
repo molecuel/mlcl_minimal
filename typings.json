@@ -1,0 +1,16 @@
+{
+  "name": "molecuel",
+  "dependencies": {},
+  "devDependencies": {},
+  "ambientDevDependencies": {
+    "async": "github:DefinitelyTyped/DefinitelyTyped/async/async.d.ts#4de74cb527395c13ba20b438c3a7a419ad931f1c",
+    "config": "github:DefinitelyTyped/DefinitelyTyped/config/config.d.ts#21939fb51a4c0046a4c7ef44a10959a5faf14309",
+    "express": "github:DefinitelyTyped/DefinitelyTyped/express/express.d.ts#dd638012d63e069f2c99d06ef4dcc9616a943ee4",
+    "express-session": "github:DefinitelyTyped/DefinitelyTyped/express-session/express-session.d.ts#3ca0e0306a56b3dff5e6999dbd1627bf30201cfc",
+    "lodash": "github:DefinitelyTyped/DefinitelyTyped/lodash/lodash-3.10.d.ts#86dbea8fc37d9473fee465da4f0a21bea4f8cbd9",
+    "mime": "github:DefinitelyTyped/DefinitelyTyped/mime/mime.d.ts#cb5206a8ac1c9a3ddfd126f5ecea6729b2361452",
+    "mongoose": "github:DefinitelyTyped/DefinitelyTyped/mongoose/mongoose.d.ts#cebde64b3a1d63d07ee7c7dbc49b631ce220d027",
+    "node": "github:DefinitelyTyped/DefinitelyTyped/node/node.d.ts#48c1e3c1d6baefa4f1a126f188c27c4fefd36bff",
+    "serve-static": "github:DefinitelyTyped/DefinitelyTyped/serve-static/serve-static.d.ts#0fa4e9e61385646ea6a4cba2aef357353d2ce77f"
+  }
+}
